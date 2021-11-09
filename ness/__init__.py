@@ -1,4 +1,4 @@
 from .datalake import DataLake as dl
 
 __all__ = ["dl"]
-__version__ = "0.1.2"
+__version__ = "0.1.3"

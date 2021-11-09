@@ -7,7 +7,7 @@ import ness
 
 
 @pytest.fixture
-def dl(format: str) -> ness.DataLake:
+def dl(format: str) -> ness.datalake.DataLake:
     return ness.dl(bucket="ness", name="test", format=format)
 
 

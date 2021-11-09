@@ -35,6 +35,6 @@ class DataLake:
     def sync(self, table: str = None) -> None:
         os.system(
             f"aws s3 sync s3://{self.bucket}/{self.key} ~/.ness/{self.key} "
-            f"--exclude '*' --include '*{table or self.format}*' "
+            f"--exclude '*' --include '*{table or ''}.{self.format}*' "
             f"--profile {self.profile}"
         )

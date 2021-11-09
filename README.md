@@ -21,14 +21,6 @@
 
 ## Installation
 
-### Using Conda:
-
-```sh
-conda install -c conda-forge pyarrow ness
-```
-
-### Using Pip:
-
 ```sh
 pip install pyarrow ness
 ```

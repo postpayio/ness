@@ -1,0 +1,13 @@
+*.*~
+*.DS_Store
+*.box
+*.log
+*.pyc
+
+__pycache__/
+.coverage
+.mypy_cache/
+.pytest_cache/
+coverage.xml
+dist/
+htmlcov/

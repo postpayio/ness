@@ -42,6 +42,9 @@ df = dl.sync()
 
 # Sync a single table
 df = dl.sync("mytable")
+
+# Sync and read a single table
+df = dl.read("mytable", sync=True)
 ```
 
 ## Format

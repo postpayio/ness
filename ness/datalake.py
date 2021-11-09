@@ -19,17 +19,13 @@ class DataLake:
         self.format = format or "parquet"
         self.profile = profile or "default"
 
-    def read(self, table: str, **kwargs: t.Any) -> pd.DataFrame:
-        if self.format == "csv":
-            reader = pd.read_csv
-        else:
-            reader = pd.read_parquet
+    def read(self, table: str, sync: bool = False, **kwargs: t.Any) -> pd.DataFrame:
+        path = Path.home() / f".ness/{self.key}/{table}.{self.format}"
 
-        path = f"{Path.home()}/.ness/{self.key}/{table}.{self.format}"
-
-        if not os.path.isdir(path) or not os.listdir(path):
+        if sync or not os.path.isdir(path) or not os.listdir(path):
             self.sync(table)
 
+        reader = getattr(pd, f"read_{self.format}", pd.read_parquet)
         return pd.concat(map(lambda f: reader(f, **kwargs), glob.glob(f"{path}/*")))
 
     def sync(self, table: str = None) -> None:

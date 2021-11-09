@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export SOURCE_FILES="ness.py tests"
+export SOURCE_FILES="ness tests"
 
 set -e
 set -x

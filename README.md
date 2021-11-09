@@ -54,7 +54,7 @@ df = dl.sync("mytable")
 
 ## Format
 
-Specifies the input data source format, the default format is `parquet`:
+Specify the input data source format, the default format is `parquet`:
 
 ```py
 import ness

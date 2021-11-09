@@ -38,7 +38,7 @@ pip install pyarrow ness
 ```py
 import ness
 
-dl = ness.dl(bucket="mybucket", name="mydatalake")
+dl = ness.dl(bucket="mybucket", key="mydatalake")
 df = dl.read("mytable")
 ```
 
@@ -59,5 +59,5 @@ Specify the input data source format, the default format is `parquet`:
 ```py
 import ness
 
-dl = ness.dl(bucket="mybucket", name="mydatalake", format="csv")
+dl = ness.dl(bucket="mybucket", key="mydatalake", format="csv")
 ```

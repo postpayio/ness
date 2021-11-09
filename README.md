@@ -65,3 +65,20 @@ Files are synced using `default` AWS profile, you can configure another one:
 import ness
 
 dl = ness.dl(bucket="mybucket", key="mydatalake", profile="myprofile")
+```
+
+## Command Line
+
+```
+Usage: ness sync [OPTIONS] S3_URI
+
+Options:
+  --format TEXT   Data lake source format.
+  --profile TEXT  AWS profile.
+  --table TEXT    Table name to sync.
+  --help          Show this message and exit.
+```
+
+```sh
+ness sync bucket/key --table mytable
+```

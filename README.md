@@ -61,3 +61,12 @@ import ness
 
 dl = ness.dl(bucket="mybucket", key="mydatalake", format="csv")
 ```
+
+## AWS Profile
+
+Files are synced using `default` AWS profile, you can configure another one:
+
+```py
+import ness
+
+dl = ness.dl(bucket="mybucket", key="mydatalake", profile="myprofile")

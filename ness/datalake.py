@@ -7,10 +7,17 @@ import pandas as pd
 
 
 class DataLake:
-    def __init__(self, bucket: str, key: str, format: str = None) -> None:
+    def __init__(
+        self,
+        bucket: str,
+        key: str,
+        format: str = None,
+        profile: str = None,
+    ) -> None:
         self.bucket = bucket
         self.key = key
         self.format = format or "parquet"
+        self.profile = profile or "default"
 
     def read(self, table: str, **kwargs: t.Any) -> pd.DataFrame:
         if self.format == "csv":
@@ -27,6 +34,7 @@ class DataLake:
 
     def sync(self, table: str = None) -> None:
         os.system(
-            f"aws s3 sync s3://{self.bucket}/{self.key} ~/.ness/{self.key}"
-            f" --exclude '*' --include '*{table or self.format}*'"
+            f"aws s3 sync s3://{self.bucket}/{self.key} ~/.ness/{self.key} "
+            f"--exclude '*' --include '*{table or self.format}*' "
+            f"--profile {self.profile}"
         )

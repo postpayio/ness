@@ -1,5 +1,7 @@
 # Changelog
 
+### 0.1.5 
+* make AWS profile optional
 ### 0.1.4
 * Added sync --delete option
 

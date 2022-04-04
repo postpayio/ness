@@ -17,7 +17,7 @@ class DataLake:
         self.bucket = bucket
         self.key = key
         self.format = format or "parquet"
-        self.profile = profile or "default"
+        self.profile = profile
 
     def read(self, table: str, sync: bool = False, **kwargs: t.Any) -> pd.DataFrame:
         path = Path.home() / f".ness/{self.key}/{table}.{self.format}"
@@ -29,8 +29,12 @@ class DataLake:
         return pd.concat(map(lambda f: reader(f, **kwargs), glob.glob(f"{path}/*")))
 
     def sync(self, table: str = None) -> None:
-        os.system(
+        cmd = (
             f"aws s3 sync s3://{self.bucket}/{self.key} ~/.ness/{self.key} "
-            f"--exclude '*' --include '*{table or ''}.{self.format}*' "
-            f"--profile {self.profile} --delete"
+            f"--exclude '*' --include '*{table or ''}.{self.format}*' --delete"
         )
+
+        if self.profile is not None:
+            cmd += f" --profile {self.profile}"
+
+        os.system(cmd)

@@ -30,7 +30,8 @@ class DataLake:
 
     def sync(self, table: str = None) -> None:
         cmd = (
-            f"aws s3 sync s3://{self.bucket}/{self.key}/{self.format} {Path.home()}/.ness/{self.key}/{self.format} "
+            f"aws s3 sync s3://{self.bucket}/{self.key}/{self.format} "
+            f"{Path.home()}/.ness/{self.key}/{self.format} "
             f"--exclude '*' --include '*{table or ''}*' --delete"
         )
 

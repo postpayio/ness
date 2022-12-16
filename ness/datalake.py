@@ -20,7 +20,7 @@ class DataLake:
         self.profile = profile
 
     def read(self, table: str, sync: bool = False, **kwargs: t.Any) -> pd.DataFrame:
-        path = Path.home() / f".ness/{self.key}/{table}.{self.format}"
+        path = Path.home() / f".ness/{self.key}/{self.format}/{table}"
 
         if sync or not os.path.isdir(path) or not os.listdir(path):
             self.sync(table)
@@ -30,8 +30,8 @@ class DataLake:
 
     def sync(self, table: str = None) -> None:
         cmd = (
-            f"aws s3 sync s3://{self.bucket}/{self.key} ~/.ness/{self.key} "
-            f"--exclude '*' --include '*{table or ''}.{self.format}*' --delete"
+            f"aws s3 sync s3://{self.bucket}/{self.key}/{self.format} {Path.home()}/.ness/{self.key}/{self.format} "
+            f"--exclude '*' --include '*{table or ''}*' --delete"
         )
 
         if self.profile is not None:
